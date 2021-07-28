@@ -1,5 +1,7 @@
 import { createStore } from "redux";
 import "./index.css"
+import reducer from "./reducer";
+import {incf, decf, updf} from "./actions";
 
 const inc = document.querySelector('.inc');
 const dec = document.querySelector('.dec');
@@ -7,19 +9,7 @@ const update = document.querySelector('.update');
 const mainNumber = document.querySelector('.main-number');
 
 
-const reducer = (state = 0, action) => {
-    switch (action.type) {
-        case "INC":
-            return state + 1
-        case "DEC":
-            return state - 1
-        case "UPT":
-            return state = 0
-        default:
-            return state;
-            }
-        }
-                
+  
 const store = createStore(reducer);
         
 
@@ -29,20 +19,15 @@ store.subscribe(() => {
     mainNumber.textContent = store.getState();
 })
 
-const incf = () => {return {type: "INC"}}
-const decf = () => {return {type: "DEC"}}
-const updf = (value) => {return {type: "UPT"}}
 
-console.log(incf())
+const {dispatch} = store;
+const incDispatch = () => dispatch(incf());
+const decDispatch = () => dispatch(decf());
+const updDispatch = () => dispatch(updf());
 
-inc.addEventListener('click', ()=>{
-    store.dispatch(incf());
-});
 
-dec.addEventListener('click', ()=>{
-    store.dispatch(decf());
-});
+inc.addEventListener('click', ()=>{incDispatch()});
 
-update.addEventListener('click', ()=>{
-    store.dispatch(updf());
-});
+dec.addEventListener('click', ()=>{decDispatch()});
+
+update.addEventListener('click', ()=>{updDispatch()});
