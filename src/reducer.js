@@ -6,6 +6,8 @@ const reducer = (state = 0, action) => {
             return state - 1
         case "UPT":
             return state = 0
+        case "RND":
+            return state + action.value;
         default:
             return state;
             }

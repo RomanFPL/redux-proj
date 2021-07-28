@@ -63,3 +63,8 @@
 .update{
     background: #CF1C1C;
 }
+
+.random{
+    background: rgb(63, 214, 108);
+    font-size: 40px;
+}
