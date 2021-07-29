@@ -20,12 +20,17 @@ store.subscribe(() => {
     mainNumber.textContent = store.getState();
 })
 
+const bindActionCreator = (creator, dispatch) => (...args) => {
+    dispatch(creator(...args));
+}
+
 
 const {dispatch} = store;
-const incDispatch = () => dispatch(incf());
-const decDispatch = () => dispatch(decf());
-const updDispatch = () => dispatch(updf());
-const rndDispatch = (value) => dispatch(rndf(value));
+// const incDispatch = () => dispatch(incf()); this function is refactored.
+const incDispatch = bindActionCreator(incf, dispatch);
+const decDispatch = bindActionCreator(decf, dispatch);
+const updDispatch = bindActionCreator(updf, dispatch);
+const rndDispatch = bindActionCreator(rndf,dispatch);
 
 
 inc.addEventListener('click', ()=>{incDispatch()});
