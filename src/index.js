@@ -1,4 +1,4 @@
-import { createStore } from "redux";
+import { createStore, bindActionCreators } from "redux";
 import "./index.css"
 import reducer from "./reducer";
 import {incf, decf, updf, rndf} from "./actions";
@@ -20,17 +20,25 @@ store.subscribe(() => {
     mainNumber.textContent = store.getState();
 })
 
-const bindActionCreator = (creator, dispatch) => (...args) => {
-    dispatch(creator(...args));
-}
+// const bindActionCreator = (creator, dispatch) => (...args) => {
+//     dispatch(creator(...args));
+// }
 
 
 const {dispatch} = store;
 // const incDispatch = () => dispatch(incf()); this function is refactored.
-const incDispatch = bindActionCreator(incf, dispatch);
-const decDispatch = bindActionCreator(decf, dispatch);
-const updDispatch = bindActionCreator(updf, dispatch);
-const rndDispatch = bindActionCreator(rndf,dispatch);
+const {incDispatch, decDispatch, updDispatch, rndDispatch} = bindActionCreators(
+    {
+        incDispatch: incf,
+        decDispatch: decf,
+        updDispatch: updf,
+        rndDispatch: rndf
+
+    }, dispatch);
+
+// const decDispatch = bindActionCreators(decf, dispatch);
+// const updDispatch = bindActionCreators(updf, dispatch);
+// const rndDispatch = bindActionCreators(rndf,dispatch);
 
 
 inc.addEventListener('click', ()=>{incDispatch()});
