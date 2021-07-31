@@ -41,12 +41,12 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  const {incf, decf, updf, rndf} = bindActionCreators(actions, dispatch);
+  const {inc, dec, upd, rnd} = bindActionCreators(actions, dispatch);
   return {
-    inc: incf,
-    dec: decf,
-    upd: updf,
-    rnd: rndf
+    inc,
+    dec,
+    upd,
+    rnd
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Counter);
